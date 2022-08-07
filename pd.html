@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="" type="text">
+    <button id="addBtn">add </button>
+    <div>
+        <ul id="perentList">
+            <li>
+                <h3>chapter 1 </h3>
+                <button id="removeBtn" onclick="removeChapter(this)">Remove</button>
+                <button id="editBtn">Edit</button>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        let addBtn = document.getElementById("addBtn");
+        perentList = document.getElementById("perentList");
+        addBtn.addEventListener("click", addChapter);
+        function addChapter(e) {
+            if( perentList.children[0].className =="emptyMsg"){
+                perentList.children[0].remove()
+            }
+            let currentBtn = e.currentTarget;
+            let currentInput = currentBtn.previousElementSibling;
+            let currentChapterName = currentInput.value;
+            // console.log(currentInput.value)
+
+            let newLi = document.createElement("li");
+            newLi.innerHTML = ` <h3>${currentChapterName}</h3>
+                <button id="removeBtn" onclick="removeChapter(this)" >Remove</button>
+                <button id="editBtn">Edit</button>`
+
+
+            perentList.appendChild(newLi)
+
+
+            // let removeChapter = document.getElementById("removeBtn")
+            //     removeChapter.removeChild(removeChapter.firstElementChild);
+        }
+
+        function removeChapter(currElement) {
+            currElement.parentElement.remove();
+
+            let perentList = document.getElementById("perentList");
+            if (perentList.children.length <= 0) {
+                let newMsg = document.createElement("h3");
+                newMsg.classList.add("emptyMsg")
+                newMsg.textContent = `Nothing is Here , Add chapter Name `
+                perentList.appendChild(newMsg)
+
+            }
+
+        }
+
+
+    </script>
+</body>
+
+</html>

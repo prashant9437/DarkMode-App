@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <input placeholder="chapterName" id="inputBtn">
+        <button id="addBtn">ADD</button>
+        <ul id="parentList">
+            <li>
+                <h3> chapter 1 </h3>
+                <button onclick="editChapter(this)">Edit</button>
+                <button onclick="removeChapter(this)">Remove</button>
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+
+    // step 1 = Add eventlistner on addbutton 
+    // step 2 = add function name of addChapter
+    // step 3 = create a element name of li tag
+    // step 4 = graph the input text by using current button and previousElementsibling
+    // step 5 = Add in edit and remove button in li tag and this buttons are each of li tag by applying the inner html 
+
+
+    let addBtn = document.getElementById('addBtn');
+    addBtn.addEventListener('click', addchapter)
+    let parentList = document.getElementById('parentList');
+    function addchapter(e) {
+
+        // remove newemptyMsg by adding chapter name
+
+        if (parentList.children[0].className == "emptyMsg") {
+            parentList.children[0].remove()
+        }
+
+        // graph the Input text 
+
+        let currentBtn = e.currentTarget;
+        let currentInput = currentBtn.previousElementSibling;
+        let currentChapterName = currentInput.value;
+
+        // make a new element 
+
+        let newLi = document.createElement('li');
+        newLi.innerHTML = ` <h3> ${currentChapterName}</h3>
+                <button onclick="editChapter(this)">Edit</button>
+                <button onclick="removeChapter(this)">Remove</button>
+               `
+
+        parentList.appendChild(newLi)
+    }
+    // to make a REMOVE function by using Onclick attribute
+
+    function removeChapter(currElement) {
+        currElement.parentElement.remove()
+        let parentList = document.getElementById('parentList');
+
+        // add newemptyMsg by removing all chapter name
+
+        if (parentList.children.length <= 0) {
+            let newEmptymsg = document.createElement('h3');
+            newEmptymsg.textContent = "Nothing is here, Please add some data "
+            newEmptymsg.classList.add("emptyMsg")
+            parentList.appendChild(newEmptymsg);
+        }
+    }
+
+    function editChapter(currElement) {
+
+        let currentChapterName = currElement.previousElementSibling.textContent;
+        let currInput = Document.createElement("input");
+
+    }
+
+</script>
+
+</html>
